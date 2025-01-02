@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">
+            <h1> S A B I N</h1>
+        </div>
+        <form id="signupForm">
+            <h2>Create Your Account</h2>
+            <div class="form-group">
+                <input type="text" id="userName" name="userName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="tel" name="tel" placeholder="Enter your Phone number." required>
+            </div>
+            <div class="form-group">
+                <input type="Age" id="Age" name="Age" placeholder="Enter your Age." required>
+            </div>
+            <div class="form-group">
+                <input type="Address" id="Address" name="Address" placeholder="Enter your Address." required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Create a password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+            <button type="submit" class="signup-button">Sign Up</button>
+        </form>
+    </div>
+</body>
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    
+        // Get form values
+        const userName = document.getElementById('userName').value;
+        const email = document.getElementById('email').value;
+        const tel = document.getElementById('tel').value;
+        const Age = document.getElementById('Age').value;
+        const Address = document.getElementById('Address').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+    
+        // Simple validation checks
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+        // Save credentials in localStorage
+        localStorage.setItem('userName',userName);
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userContact', tel);
+        localStorage.setItem('userAge', Age);
+        localStorage.setItem('userAddress', Address);
+        localStorage.setItem('userPassword', password);
+    
+        // Notify user of successful sign-up
+        alert('Sign-Up Successful!');
+    
+        // Redirect to login.html
+        window.location.href = 'login.html';
+    }); 
+</script>
+</html>

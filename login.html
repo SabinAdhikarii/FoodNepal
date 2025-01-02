@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/CSS/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+         <h1> S A B I N</h1>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Enter your email or username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-options">
+                <label><input type="checkbox" name="remember"> Remember Me</label>
+                <a href="#" class="forgot-password">  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forgot Password?</a>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <div class="signup-link">
+                <span>Don't have an account? <a href="signup.html">Sign Up</a></span>
+            </div>
+            
+        </form>
+    </div>
+
+
+    <script>
+        document.getElementById('loginForm').addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            // Get input values
+            const loginEmail = document.getElementById('username').value;
+            const loginPassword = document.getElementById('password').value;
+        
+            // Get stored credentials from localStorage
+            const storedEmail = localStorage.getItem('userEmail');
+            const storedPassword = localStorage.getItem('userPassword');
+        
+            // Validate credentials
+            if (loginEmail === storedEmail && loginPassword === storedPassword) {
+                alert('Login Successful!');
+                // Redirect to index.html after successful login
+                window.location.href = 'Home.html';
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+        
+    </script>
+    </body>
+</html>

@@ -1,0 +1,111 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-style: italic;
+    color: #ff7700;
+    margin-left: 20px;
+}
+
+.search-box {
+    flex-grow: 1;
+    margin: 0 20px;
+    position: relative;
+    text-align: center;
+}
+
+.search-box input {
+    width: 50%;
+    padding: 8px 40px 8px 10px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: #1a1a1a;
+}
+
+.search-btn {
+    position: absolute;
+    right: calc(25% - 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: #ff7700;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ff7700;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-links a:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.nav-links a:hover {
+    color: #ff7700;
+}
+
+.thank-you-container {
+    padding: 55px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+}
+
+.thank-you-container h1 {
+    font-size: 50px;
+   
+}
+
+.thank-you-container p {
+    font-size: 18px;
+    padding: 10px;
+}

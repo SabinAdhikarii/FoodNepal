@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - S A B I N</title>
+    <link rel="stylesheet" href="aboutstyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><b>S A B I N</b></div>
+          <div class="search-box">
+              <input type="text" placeholder="Search...">
+              <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <ul class="nav-links">
+              <li><a href="Home.html">Home</a></li>
+              <li><a href="Food.html">Foods</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                  <span id="cart-count" class="cart-count">0</span></li>
+              <li><a href="myprofile.html">My Profile</a></li>
+          </ul>
+      </nav>
+
+    <div class="about-container">
+        <div class="about-text">
+            <h1>About <span><I>S A B I N</I></span></h1>
+            <h3> Delivering happiness with good food.</h3>
+            <p><I> S A B I N</I> Delivers has a purpose – to deliver you quality food in an affordable and convenient manner. 
+                 We provide you the easiest way to order food and have it delivered to your door.
+                 We bring you a wide range of food choices with the best quality ingredients to make sure you enjoy your meal.</p>
+        </div>
+        <div class="about-image">
+            <img src="/images/about1.jpg" alt="About S A B I N">
+        </div>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form id="contactForm" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Gmail</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your Gmail">
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="text" id="contact" name="contact" placeholder="Enter your contact number">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Write your message" rows="5"></textarea>
+                </div>
+                <button class="submit">Submit</button>
+                
+            </form>
+        </div>
+        <div class="contact-image">
+            <img src="/images/about2.jpg" alt="Contact Us">
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            const contactPattern = /^[0-9]{10}$/;
+    
+            if (!name) {
+                alert("Name is required");
+                return false;
+            }
+            if (!contactPattern.test(contact)) {
+                alert("Please enter a valid 10-digit contact number");
+                return false;
+            }
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid Gmail address");
+                return false;
+            }
+            if (!message) {
+                alert("Message cannot be empty");
+                return false;
+            }
+    
+            // Redirect to Thank You page
+            window.location.href = "thankyou.html";
+            return false; // Prevent default form submission
+        }
+
+const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+const cartCountElement = document.getElementById('cart-count');
+let cartCount = 0;
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+
+// Update cart count on page load
+cartCount = cartItems.length;
+cartCountElement.textContent = cartCount;
+
+addToCartButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        // Find the product name, price, and image
+        const productElement = button.closest('.menu-item');
+        const productName = productElement.querySelector('span').textContent;
+        const productPrice = productElement.querySelector('p:nth-of-type(2)').textContent.split(': ')[1];
+        const productImage = productElement.querySelector('img').src;
+
+        // Add product to cartItems array
+        const product = { name: productName, price: productPrice, image: productImage };
+        cartItems.push(product);
+        
+        // Update local storage
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+        // Increment and update cart count
+        cartCount++;
+        cartCountElement.textContent = cartCount;
+    });
+});
+
+    </script>
+    
+
+
+
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <h3><b><I> S A B I N</I></b></h3>
+            <p class="footer-links">
+                <a href="#" class="link-1">Home</a>
+                <a href="#">Blog</a>
+                <a href="#">Pricing</a>
+                <a href="#">About</a>
+                <a href="#">Faq</a>
+                <a href="#">Contact</a>
+            </p>
+            <p class="footer-company-name"><b><I> S A B I N</I></b> © 2015</p>
+        </div>
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span> Kamal Pokhari,Kathmandu</span> Kathmandu, Nepal</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+977 9843764833</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:support@company.com">support@sabin.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the company</span>
+                Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+            </p>
+            <div class="footer-icons">
+                <a href="https://www.facebook.com/SabinAdhikari99"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/sabin--adhikari/"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="myprofile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><b>S A B I N</b></div>
+          <div class="search-box">
+              <input type="text" placeholder="Search...">
+              <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <ul class="nav-links">
+              <li><a href="Home.html">Home</a></li>
+              <li><a href="Food.html">Foods</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                  <span id="cart-count" class="cart-count">0</span></li>
+              <li><a href="myprofile.html">My Profile</a></li></ul>
+    </nav>
+    <div class="profile-container">
+        <h1>Welcome, <span id="userName"></span>!</h1>
+        <p>Email: <span id="userEmail"></span></p>
+        <p> Contact: <span id="userContact"></span></p>
+        <p> Age: <span id="userAge"></span></p>
+        <p> Address: <span id="userAddress"></span></p>
+    </div>
+
+    <script>
+        // Retrieve stored name, email, and contact from localStorage
+const userName = localStorage.getItem('userName');
+const userEmail = localStorage.getItem('userEmail');
+const userContact = localStorage.getItem('userContact');
+const userAge = localStorage.getItem('userAge');
+const userAddress = localStorage.getItem('userAddress');
+
+// Display the retrieved name, email, and contact in the profile page
+document.getElementById('userName').textContent = userName;
+document.getElementById('userEmail').textContent = userEmail;
+document.getElementById('userContact').textContent = userContact;
+document.getElementById('userAge').textContent = userAge;
+document.getElementById('userAddress').textContent = userAddress;
+
+const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+const cartCountElement = document.getElementById('cart-count');
+let cartCount = 0;
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+// Update cart count on page load
+cartCount = cartItems.length;
+cartCountElement.textContent = cartCount;
+
+addToCartButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        // Find the product name, price, and image
+        const productElement = button.closest('.menu-item');
+        const productName = productElement.querySelector('span').textContent;
+        const productPrice = productElement.querySelector('p:nth-of-type(2)').textContent.split(': ')[1];
+        const productImage = productElement.querySelector('img').src;
+
+        // Add product to cartItems array
+        const product = { name: productName, price: productPrice, image: productImage };
+        cartItems.push(product);
+        
+        // Update local storage
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+        // Increment and update cart count
+        cartCount++;
+        cartCountElement.textContent = cartCount;
+    });
+});
+    </script>
+</body>
+</html>

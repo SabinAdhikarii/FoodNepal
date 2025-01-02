@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Navigation Bar with Search Icon</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><b>S A B I N</b></div>
+          <div class="search-box">
+              <input type="text" placeholder="Search...">
+              <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <ul class="nav-links">
+              <li><a href="Home.html">Home</a></li>
+              <li><a href="Food.html">Foods</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                  <span id="cart-count" class="cart-count">0</span></li>
+              <li><a href="myprofile.html">My Profile</a></li>
+          </ul>
+      </nav>
+
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        <div id="cart-items"></div>
+    </div>
+
+    <script>
+        const cartItemsElement = document.getElementById('cart-items');
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        function renderCart() {
+            cartItemsElement.innerHTML = ''; // Clear current items
+            if (cartItems.length > 0) {
+                cartItems.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    
+                    // Create the HTML structure for each cart item
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <p><strong>${item.name}</strong></p>
+                            <p>${item.price}</p>
+                        </div>
+                        <button class="buy-now-btn" data-index="${index}">Buy Now</button>&nbsp;&nbsp;
+                        <button class="remove-btn" data-index="${index}">  Remove</button>
+                    `;
+                    cartItemsElement.appendChild(itemElement);
+                });
+            } else {
+                cartItemsElement.innerHTML = '<p>Your cart is empty.</p>';
+            }
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1); // Remove item from array
+            localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update local storage
+            renderCart(); // Re-render cart items
+        }
+        renderCart();
+        // Event delegation for remove and buy now buttons
+        cartItemsElement.addEventListener('click', (event) => {
+            const index = event.target.getAttribute('data-index');
+            if (event.target.classList.contains('remove-btn')) {
+                removeFromCart(index);
+            } else if (event.target.classList.contains('buy-now-btn')) {
+                buyNow(index);
+            }
+        });   
+
+    </script>
+
+    <style>
+        .cart-container {
+            padding-top: 5rem;
+            padding-left: 2rem;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .cart-item-image {
+            width: 20rem;
+            height: 17rem;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 10%;
+        }
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        .cart-item-details p {
+            margin: 2px 0;
+            padding-top: 0%;
+        }
+    </style>
+</body>
+</html>

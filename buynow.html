@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Navigation Bar with Search Icon</title>
+    <link rel="stylesheet" href="buynow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><b>S A B I N</b></div>
+          <div class="search-box">
+              <input type="text" placeholder="Search...">
+              <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <ul class="nav-links">
+              <li><a href="Home.html">Home</a></li>
+              <li><a href="Food.html">Foods</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                  <span id="cart-count" class="cart-count">0</span></li>
+              <li><a href="myprofile.html">My Profile</a></li>
+          </ul>
+      </nav>
+<body>
+    <div class="menu-container">
+        <div class="menu-item">
+            <img id="product-image" src="" alt="Product Image">
+        </div>
+        <div>
+            <h2 id="product-name"></h2>
+            <h4 id="product-price"></h4>
+            
+            <!-- Payment Options -->
+            <h3>Choose Your Payment Method:</h3>
+            <div class="payment-options">
+                <div class="payment-option">
+                        <img src="images/esewa.jpg" alt="eSewa" class="payment-logo"> 
+                        <p>eSewa</p>
+                        <form action="https://esewa.com.np/epay/main" method="POST">
+                            <input type="hidden" name="amt" value="100">
+                            <input type="hidden" name="txAmt" value="0">
+                            <input type="hidden" name="psc" value="0">
+                            <input type="hidden" name="pdc" value="0">
+                            <input type="hidden" name="tAmt" value="240">
+                            <input type="hidden" name="pid" value="GOLDEN_OAK_Q_001">
+                            <input type="hidden" name="scd" value="YOUR_MERCHANT_CODE">
+                            <input type="hidden" name="su" value="http://yourwebsite.com/success.html">
+                            <input type="hidden" name="fu" value="http://yourwebsite.com/failure.html">
+                            <button type="submit" class="buy-now-btn">Pay with eSewa</button>
+                        </form>
+                        
+                </div>
+                <div class="payment-option">
+                        <img src="/images/khalti.jpg" alt="Khalti" class="payment-logo">  
+                        <p>Khalti</p>             
+                        <button id="buy-now-btn" class="buy-now-btn"> Pay With Khalti</button>  
+                </div>
+                <div class="payment-option">
+                    <a href="https://www.nicasiabank.com/mobile-banking/" target="_blank">
+                        <img src="/images/NIC.png" alt="Bank Card" class="payment-logo">
+                    </a>
+                    <p>Bank Card</p>
+                    <button id="buy-now-btn" class="buy-now-btn"> Pay With NIC Asia</button> 
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    
+
+    <script>
+        // Retrieve product details from localStorage
+        const product = JSON.parse(localStorage.getItem('selectedProduct'));
+
+        // Display product details on the checkout page
+        document.getElementById('product-name').textContent = product.name;
+        document.getElementById('product-price').textContent = 'Price: ' + product.price;
+        document.getElementById('product-image').src = product.imageSrc;
+
+
+          // Get the selected item from localStorage
+          const selectedItem = JSON.parse(localStorage.getItem('selectedItem'));
+          // Display the selected item details
+          const productDetailsElement = document.getElementById('product-details');
+          if (selectedItem) {
+              productDetailsElement.innerHTML = `
+                  <img src="${selectedItem.image}" alt="${selectedItem.name}" class="product-image">
+                  <div class="product-info">
+                      <h2>${selectedItem.name}</h2>
+                      <p>${selectedItem.price}</p>
+                  </div>
+              `;
+          } else {
+              productDetailsElement.innerHTML = '<p>No product selected.</p>';
+          }
+  
+          // Handle purchase button click
+          document.getElementById('buy-now-btn').addEventListener('click', () => {
+              alert('Purchase successful!');
+              // You can add your purchase logic here
+              localStorage.removeItem('selectedItem'); // Clear the selected item after purchase
+              window.location.href = 'index.html'; // Redirect to the home page or any other page
+          });
+
+        
+         
+          </script>
+</body>
+</html>
