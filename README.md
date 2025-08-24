@@ -1,4 +1,4 @@
-FoodNepal is my first webdevelopment project 
+FoodNepal is my first web development project 
 
 # FoodNepal
 FoodNepal
